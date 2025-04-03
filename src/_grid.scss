@@ -1,0 +1,59 @@
+@use '@/scss/framework/framework-utils' as *;
+
+/**
+ * Generates a grid definition for a grid with equal sized columns
+ *
+ * @param   {number | custom css prop}  $grid-columns    grid column count; must be even and greate or equal than 4
+ * @param   {number | custom css prop}  $gutter-size     grid gutter size
+ *
+ * @return  grid definition
+ */
+@function generate-content-grid($grid-columns: v(default-grid-columns), $gutter-size: v(default-grid-gutter-size)) {
+    $_grid-columns: #{$grid-columns};
+    $_total-gutter-size: calc((#{$_grid-columns} - 1) * #{$gutter-size});
+
+    /* prettier-ignore */
+    $_content-width: calc(#{v(page-width)} - 2 * #{v(page-indent)} - 2 * #{v(content-indent)});
+    $_column-size: minmax(0, calc(($_content-width - $_total-gutter-size) / $_grid-columns));
+
+    $cols-count: calc(($_grid-columns / 2) - 1);
+
+    /* prettier-ignore */
+    @return [grid-start]
+        repeat(
+            $cols-count,
+            [column-start] $_column-size [column-end] #{$gutter-size}
+        )
+        [column-start] $_column-size [column-end]
+        calc(#{v(default-grid-gutter-size)} / 2)
+        [mid]
+        calc(#{v(default-grid-gutter-size)} / 2)
+        repeat(
+            $cols-count,
+            [column-start] $_column-size [column-end] #{v(default-grid-gutter-size)}
+        )
+        [column-start] $_column-size [column-end grid-end];
+}
+
+@mixin section-grid($content-grid: generate-content-grid()) {
+    display: grid;
+    column-gap: 0;
+
+    $_viewport-indent: calc((100% - #{v(page-width)}) / 2);
+
+    @include v(
+        (
+            viewport-indent: (
+                default: 0px,
+                xs: $_viewport-indent,
+            ),
+        )
+    );
+
+    grid-template-columns:
+        [viewport-start] v(viewport-indent)
+        [page-start] v(page-indent)
+        [content-start] #{v(content-indent)} $content-grid #{v(content-indent)} [content-end]
+        v(page-indent) [page-end]
+        v(viewport-indent) [viewport-end];
+}

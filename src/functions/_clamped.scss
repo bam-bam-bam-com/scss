@@ -1,0 +1,12 @@
+@use 'sass:math';
+
+$default-min-bp: 320px !default !global;
+$default-max-bp: 2560px !default !global;
+
+@function clamped($min-px, $max-px, $min-bp: $default-min-bp, $max-bp: $default-max-bp) {
+    $slope: math.div($max-px - $min-px, $max-bp - $min-bp);
+    $intercept-px: $min-px - $slope * $min-bp;
+    $slope-vw: $slope * 100;
+
+    @return clamp(#{$min-px}, #{$slope-vw}vw + #{$intercept-px}, #{$max-px});
+}

@@ -1,0 +1,21 @@
+@use 'sass:math';
+@use '../v' as *;
+
+@function shadow-elevated($level: 0, $color: #{v(color-shadow, #000)}) {
+    @if ($level == 1) {
+        @return 10px 10px 20px 0px color-mix(in srgb, $color 92%, transparent);
+    } @else if ($level == 2) {
+        @return 0px 30px 30px color-mix(in srgb, $color 25%, transparent);
+    } @else {
+        @return 0px 0px 0px 0px $color;
+    }
+}
+
+@function material-shadow($xOffset, $yOffset, $level, $color: #{v(color-shadow, #000)}) {
+    // Material Design elevation levels (approximations)
+    $blur: $level * 4px; // Blur increases with level
+    $spread: $level * 1px; // Spread increases with level
+    $opacity: math.clamp(0, (1 - $level * 0.05), 1) * 100%;
+
+    @return #{$xOffset} #{$yOffset} #{$blur} #{$spread} color-mix(in srgb, #{$color} #{$opacity}, transparent);
+}

@@ -1,0 +1,32 @@
+{
+  "author": "Hendrik Bunnick <hendrik@bamx.io> (https://bam-bam-bam.com/)",
+  "description": "SCSS Framework",
+  "directories": {
+    "lib": "src"
+  },
+  "exports": {
+    "sass": "./src/_index.scss"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "scss",
+    "sass",
+    "framework",
+    "frontend",
+    "bam-bam-bam"
+  ],
+  "license": "MIT",
+  "main": "src/_index.scss",
+  "name": "@bam-bam-bam/scss",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bam-bam-bam-com/scss.git"
+  },
+  "style": "src/_index.scss",
+  "version": "0.1.0"
+}

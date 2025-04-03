@@ -1,0 +1,48 @@
+@use 'sass:map' as map;
+// @use "config" as *;
+$breakpoints: (
+    xs: 375px,
+    s: 680px,
+    sm: 680px,
+    m: 768px,
+    md: 768px,
+    l: 1024px,
+    lg: 1024px,
+    xl: 1280px,
+    xxl: 1440px,
+    hd: 1920px,
+) !default !global;
+
+@function breakpoint($key) {
+    @return map.get($breakpoints, $key);
+}
+
+@mixin mq-to($key) {
+    @media (width < breakpoint($key)) {
+        @content;
+    }
+}
+
+@mixin mq-from($key) {
+    @media (width >= breakpoint($key)) {
+        @content;
+    }
+}
+
+@mixin mq-range($from, $to) {
+    @media (breakpoint($from) <= width < breakpoint($to)) {
+        @content;
+    }
+}
+
+@mixin responsive-property($property, $breakpoint_value_map) {
+    @each $breakpoint, $value in $breakpoint_value_map {
+        @if ($breakpoint != default) {
+            @include mq-from($breakpoint) {
+                #{$property}: $value;
+            }
+        } @else {
+            #{$property}: $value;
+        }
+    }
+}

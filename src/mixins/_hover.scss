@@ -1,0 +1,8 @@
+@mixin hover($selector: '&:hover', $hover: hover, $pointer: fine) {
+    // https://hover-pointer-media-query.glitch.me/
+    @media (hover: $hover) and (pointer: $pointer) {
+        #{$selector} {
+            @content;
+        }
+    }
+}

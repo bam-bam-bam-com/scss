@@ -1,0 +1,44 @@
+@use 'sass:meta';
+@use 'sass:string';
+@use 'sass:list';
+@use 'breakpoints';
+
+@function get-var-name($key, $infix: '') {
+    $prefix: '';
+
+    @if $infix != '' {
+        $infix: $infix + '-';
+    }
+
+    @return #{$prefix}#{$infix}#{$key};
+}
+
+@mixin _output-value($var-base-name, $value) {
+    $var-name: get-var-name($var-base-name);
+    #{$var-name}: $value;
+}
+
+@mixin v($map_or_key, $value: null, $skipStore: false) {
+    $type: meta.type-of($map_or_key);
+
+    @if $type == map {
+        @each $var-base-name, $v in $map_or_key {
+            $var_name: get-var-name($var-base-name);
+
+            @if & {
+                @if (meta.type-of($v) == map) {
+                    // write out vars in media queries
+                    @include breakpoints.responsive-property($var_name, $v);
+                } @else if $v {
+                    @include _output-value($var-base-name, $v);
+                }
+            }
+        }
+    } @else {
+        $var-base-name: $map_or_key;
+
+        @if & {
+            @include _output-value($var-base-name, $value);
+        }
+    }
+}
