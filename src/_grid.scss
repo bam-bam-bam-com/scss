@@ -8,7 +8,7 @@
  *
  * @return  grid definition
  */
-@function generate-content-grid($grid-columns: var(--default-grid-columns), $gutter-size: var(--default-grid-gutter-size)) {
+@function generate-content-grid($grid-columns: var(--default-grid-columns, 12), $gutter-size: var(--default-grid-gutter-size, 16px)) {
     $_grid-columns: #{$grid-columns};
     $_total-gutter-size: calc((#{$_grid-columns} - 1) * #{$gutter-size});
 
@@ -25,9 +25,9 @@
             [column-start] $_column-size [column-end] #{$gutter-size}
         )
         [column-start] $_column-size [column-end]
-        calc(#{var(--default-grid-gutter-size)} / 2)
+        calc(#{var(--default-grid-gutter-size, 0px)} / 2)
         [mid]
-        calc(#{var(--default-grid-gutter-size)} / 2)
+        calc(#{var(--default-grid-gutter-size, 0px)} / 2)
         repeat(
             $cols-count,
             [column-start] $_column-size [column-end] #{var(--default-grid-gutter-size)}
