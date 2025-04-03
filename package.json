@@ -1,5 +1,5 @@
 {
-  "author": "Hendrik Bunnick <hendrik@bamx.io> (https://bam-bam-bam.com/)",
+  "author": "Dev <dev@bam-bam-bam-com> (https://bam-bam-bam.com/)",
   "description": "SCSS Framework",
   "directories": {
     "lib": "src"
@@ -21,7 +21,7 @@
   ],
   "license": "MIT",
   "main": "src/_index.scss",
-  "name": "@bam-bam-bam/scss",
+  "name": "@bamx/scss",
   "private": false,
   "repository": {
     "type": "git",
