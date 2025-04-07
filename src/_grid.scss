@@ -1,4 +1,4 @@
-@use '@/scss/framework/framework-utils' as *;
+@use "v";
 
 /**
  * Generates a grid definition for a grid with equal sized columns
@@ -41,14 +41,12 @@
 
     $_viewport-indent: calc((100% - #{var(--page-width)}) / 2);
 
-    @include v(
-        (
-            viewport-indent: (
-                default: 0px,
-                xs: $_viewport-indent,
-            ),
-        )
-    );
+    @include v.v((
+        --viewport-indent: (
+            default: 0px,
+            xs: $_viewport-indent,
+        ),
+    ));
 
     grid-template-columns:
         [viewport-start] var(--viewport-indent)

@@ -1,4 +1,5 @@
 {
+  "access": "public",
   "author": "Dev <dev@bam-bam-bam-com> (https://bam-bam-bam.com/)",
   "description": "SCSS Framework",
   "directories": {
@@ -24,8 +25,8 @@
   "name": "@bamx/scss",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bam-bam-bam-com/scss.git"
+    "url": "git+https://github.com/bam-bam-bam-com/scss.git"
   },
   "style": "src/_index.scss",
-  "version": "0.1.1"
+  "version": "0.1.2"
 }
